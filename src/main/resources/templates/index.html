@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>clinic hospital system</title>
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Material Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24;
+    }
+  </style>
+</head>
+<body class="bg-[#0f172a] text-gray-200 flex flex-col h-screen">
+
+  <!-- Top Navbar -->
+  <header class="flex items-center justify-between bg-[#1e293b] px-6 h-14 border-b border-gray-700">
+    <!-- Logo -->
+    <div class="flex items-center space-x-2 font-bold text-lg text-white">
+      <span class="material-symbols-outlined text-cyan-400">medical_services</span>
+      <span>ClinicSys</span>
+    </div>
+
+    <!-- Right Icons -->
+    <div class="flex items-center space-x-6 text-gray-300">
+        <span class="material-symbols-outlined cursor-pointer hover:text-cyan-400">settings</span>
+        <span class="material-symbols-outlined cursor-pointer hover:text-cyan-400">notifications</span>
+      <span class="material-symbols-outlined cursor-pointer hover:text-cyan-400">account_circle</span>
+    </div>
+  </header>
+
+  <div class="flex flex-1 overflow-hidden">
+
+    <!-- Sidebar -->
+    <aside id="sidebar"
+      class="bg-[#111827] w-56 transition-all duration-300 flex flex-col py-4 overflow-y-auto border-r border-gray-800">
+      <nav class="flex-1">
+        <a href="#" class="flex items-center gap-3 px-4 py-2 text-gray-300 hover:bg-[#1e293b] rounded-md">
+          <span class="material-symbols-outlined">dashboard</span>
+          <span class="sidebar-text">Dashboard</span>
+        </a>
+        <a href="#" class="flex items-center gap-3 px-4 py-2 text-gray-300 hover:bg-[#1e293b] rounded-md">
+          <span class="material-symbols-outlined">groups</span>
+          <span class="sidebar-text">Patients</span>
+        </a>
+        <a href="#" class="flex items-center gap-3 px-4 py-2 text-gray-300 hover:bg-[#1e293b] rounded-md">
+          <span class="material-symbols-outlined">medical_information</span>
+          <span class="sidebar-text">Doctors</span>
+        </a>
+        <a href="#" class="flex items-center gap-3 px-4 py-2 text-gray-300 hover:bg-[#1e293b] rounded-md">
+          <span class="material-symbols-outlined">calendar_month</span>
+          <span class="sidebar-text">Appointments</span>
+        </a>
+        <a href="#" class="flex items-center gap-3 px-4 py-2 text-gray-300 hover:bg-[#1e293b] rounded-md">
+          <span class="material-symbols-outlined">settings</span>
+          <span class="sidebar-text">Settings</span>
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Toggle Button -->
+    <button id="toggleBtn"
+      class="absolute top-16 left-56 bg-[#1e293b] p-2 rounded-full text-gray-400 hover:text-white hover:bg-[#334155] transition-all duration-200">
+      <span class="material-symbols-outlined">chevron_left</span>
+    </button>
+
+    <!-- Main Content -->
+    <main id="main" class="flex-1 p-6 overflow-y-auto transition-all duration-300">
+      <div th:insert="${content}"></div>
+    </main>
+  </div>
+
+  <script>
+    const sidebar = document.getElementById('sidebar');
+    const toggleBtn = document.getElementById('toggleBtn');
+    const icon = toggleBtn.querySelector('.material-symbols-outlined');
+    const textEls = document.querySelectorAll('.sidebar-text');
+
+    toggleBtn.addEventListener('click', () => {
+      const collapsed = sidebar.classList.toggle('w-20');
+      sidebar.classList.toggle('w-56', !collapsed);
+      textEls.forEach(el => el.classList.toggle('hidden'));
+      icon.textContent = collapsed ? 'chevron_right' : 'chevron_left';
+      toggleBtn.style.left = collapsed ? '5rem' : '14rem';
+    });
+  </script>
+
+</body>
+</html>
