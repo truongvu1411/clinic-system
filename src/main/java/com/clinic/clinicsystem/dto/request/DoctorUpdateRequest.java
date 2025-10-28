@@ -16,4 +16,5 @@ public class DoctorUpdateRequest {
     String address;
     int experience;
     String description;
+    String imageUrl;
 }

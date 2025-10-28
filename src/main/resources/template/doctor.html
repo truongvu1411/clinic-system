@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Management</title>
+    <style>
+        body { font-family: Arial; margin: 20px; }
+        input, button { margin: 5px 0; }
+        hr { margin: 20px 0; }
+    </style>
+</head>
+<body>
+<h1>Quản lý Bác sĩ</h1>
+
+<!-- Xem danh sách -->
+<h2>Danh sách bác sĩ</h2>
+<button onclick="getAllDoctors()">Xem danh sách</button>
+<ul id="doctor-list"></ul>
+<hr>
+
+<!-- Thêm bác sĩ -->
+<h2>Thêm bác sĩ</h2>
+<input type="text" id="add-name" placeholder="Tên">
+<input type="text" id="add-email" placeholder="Email">
+<input type="text" id="add-specialization" placeholder="Chuyên môn">
+<button onclick="addDoctor()">Thêm</button>
+<hr>
+
+<!-- Cập nhật bác sĩ -->
+<h2>Cập nhật bác sĩ</h2>
+<input type="text" id="update-email" placeholder="Email của bác sĩ">
+<input type="text" id="update-name" placeholder="Tên mới">
+<input type="text" id="update-specialization" placeholder="Chuyên môn mới">
+<button onclick="updateDoctor()">Cập nhật</button>
+<hr>
+
+<!-- Xóa bác sĩ -->
+<h2>Xóa bác sĩ</h2>
+<input type="text" id="delete-email" placeholder="Email của bác sĩ">
+<button onclick="deleteDoctor()">Xóa</button>
+<hr>
+
+<!-- Tìm kiếm bác sĩ -->
+<h2>Tìm kiếm bác sĩ</h2>
+<input type="text" id="search-field" placeholder="Tên field (name/specialization/email)">
+<input type="text" id="search-value" placeholder="Giá trị cần tìm">
+<button onclick="searchDoctors()">Tìm kiếm</button>
+<ul id="search-results"></ul>
+
+<script>
+    const BASE_URL = 'http://localhost:8080/doctors';
+
+    // GET /doctors
+    function getAllDoctors() {
+        fetch(BASE_URL)
+            .then(res => res.json())
+            .then(data => {
+                const list = document.getElementById('doctor-list');
+                list.innerHTML = data.map(d => `<li>${d.name} - ${d.email} - ${d.specialization}</li>`).join('');
+            })
+            .catch(err => console.error(err));
+    }
+
+    // POST /doctors
+    function addDoctor() {
+        const doctor = {
+            name: document.getElementById('add-name').value,
+            email: document.getElementById('add-email').value,
+            specialization: document.getElementById('add-specialization').value
+        };
+        fetch(BASE_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(doctor)
+        })
+            .then(res => res.json())
+            .then(data => { alert('Thêm thành công'); getAllDoctors(); })
+            .catch(err => console.error(err));
+    }
+
+    // PUT /doctors/{email}
+    function updateDoctor() {
+        const email = document.getElementById('update-email').value;
+        const updatedDoctor = {
+            name: document.getElementById('update-name').value,
+            specialization: document.getElementById('update-specialization').value
+        };
+        fetch(`${BASE_URL}/${email}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(updatedDoctor)
+        })
+            .then(res => res.json())
+            .then(data => { alert('Cập nhật thành công'); getAllDoctors(); })
+            .catch(err => console.error(err));
+    }
+
+    // DELETE /doctors/{email}
+    function deleteDoctor() {
+        const email = document.getElementById('delete-email').value;
+        fetch(`${BASE_URL}/${email}`, { method: 'DELETE' })
+            .then(res => {
+                if (res.ok) { alert('Xóa thành công'); getAllDoctors(); }
+                else alert('Xóa thất bại');
+            })
+            .catch(err => console.error(err));
+    }
+
+    // POST /doctors/search
+    function searchDoctors() {
+        const field = document.getElementById('search-field').value;
+        const value = document.getElementById('search-value').value;
+        fetch(`${BASE_URL}/search`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ field, value })
+        })
+            .then(res => res.json())
+            .then(data => {
+                const list = document.getElementById('search-results');
+                list.innerHTML = data.map(d => `<li>${d.name} - ${d.email} - ${d.specialization}</li>`).join('');
+            })
+            .catch(err => console.error(err));
+    }
+</script>
+</body>
+</html>

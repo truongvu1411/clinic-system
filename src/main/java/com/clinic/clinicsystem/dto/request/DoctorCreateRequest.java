@@ -17,4 +17,5 @@ public class DoctorCreateRequest {
     String address;
     int experience;
     String description;
+    String imageUrl;
 }

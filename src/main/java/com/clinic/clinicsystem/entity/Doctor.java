@@ -32,4 +32,6 @@ public class Doctor {
 
     @Column(length = 500)
     private String description;
+
+    private String  imageUrl;
 }
