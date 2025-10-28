@@ -39,7 +39,7 @@ public class DoctorService {
 
     public DoctorResponse updateDoctor(String email, DoctorUpdateRequest request) {
         Doctor doctor = doctorRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("Doctor with phone " + email + " not found"));
+                .orElseThrow(() -> new RuntimeException("Doctor with email " + email + " not found"));
         doctor.setName(request.getName());
         doctor.setSpecialization(request.getSpecialization());
         doctor.setPhone(request.getPhone());
@@ -57,7 +57,7 @@ public class DoctorService {
 
     public DoctorResponse getByEmail(String email) {
         Doctor doctor = doctorRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("Doctor with phone " + email + " not found"));
+                .orElseThrow(() -> new RuntimeException("Doctor with email " + email + " not found"));
         return doctorMapper.toDoctorResponse(doctor);
     }
 

@@ -11,6 +11,7 @@ import lombok.experimental.FieldDefaults;
 public class DoctorCreateRequest {
     String name;
     String specialization;
+    String position;
     String phone;
     String email;
     String gender;

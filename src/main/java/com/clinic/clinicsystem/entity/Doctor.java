@@ -17,6 +17,8 @@ public class Doctor {
 
     private String specialization;
 
+    private String position;
+
     private String phone;
 
     @Column(unique = true, nullable = false)

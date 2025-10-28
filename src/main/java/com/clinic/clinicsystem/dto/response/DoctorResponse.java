@@ -14,6 +14,8 @@ public class DoctorResponse {
 
     String specialization;
 
+    String position;
+
     String phone;
 
     String email;
@@ -25,5 +27,7 @@ public class DoctorResponse {
     int experience;
 
     boolean available;
+
+    String imageUrl;
 
 }
