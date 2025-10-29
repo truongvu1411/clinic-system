@@ -27,6 +27,7 @@ public class DoctorController {
     ApiResponse<DoctorResponse> createDoctor(@RequestBody DoctorCreateRequest request){
         return ApiResponse.<DoctorResponse>builder()
                 .result(doctorService.createDoctor(request))
+                .total(1)
                 .build();
     }
 
@@ -42,15 +43,17 @@ public class DoctorController {
     ApiResponse<List<DoctorResponse>> getAllDoctors(){
         return ApiResponse.<List<DoctorResponse>>builder()
                 .result(doctorService.getAllDoctor())
+                .total(doctorService.getAllDoctor().size())
                 .build();
     }
 
 
     // update Doctor theo email
     @PutMapping("/{email}")
-    ApiResponse<DoctorResponse> updateDoctor(@PathVariable("email") String email, DoctorUpdateRequest request){
+    ApiResponse<DoctorResponse> updateDoctor(@PathVariable("email") String email,@RequestBody DoctorUpdateRequest request){
         return ApiResponse.<DoctorResponse>builder()
                 .result(doctorService.updateDoctor(email, request))
+                .total(1)
                 .build();
     }
 
@@ -61,6 +64,7 @@ public class DoctorController {
         return ApiResponse.<List<DoctorResponse>>builder()
                 .message("Search success")
                 .result(result)
+                .total(result.size())
                 .build();
     }
 }

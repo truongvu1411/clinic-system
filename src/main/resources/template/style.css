@@ -1,0 +1,62 @@
+/* MATERIAL ICON STYLES*/
+.material-symbols-outlined {
+  font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
+}
+
+/* NAVBAR LINKS */
+
+#navbar-menu:hover{
+    color: #22d3ee;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #d1d5db;
+  transition: color 0.2s ease-in-out;
+}
+
+.nav-link:hover {
+  color: #22d3ee;
+}
+
+.nav-link.active {
+  color: #22d3ee;
+  font-weight: 600;
+}
+
+/* DOCTOR PAGE STYLES */
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+.doctor-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+aside ul li {
+  cursor: pointer;
+  padding: 4px 0;
+}
+
+aside ul li:hover {
+  color: #047857;
+  font-weight: 500;
+} 
+
+html, body {
+  overflow-y: auto;
+}
+
+
+.welcom{
+    
+}   

@@ -1,151 +1,111 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clinic Hospital System</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Material Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <div class="header">
-  <div class="header__top">
-    <div class="container">
-      <div class="header__list-top">
-        <a class="header__call-phone d-none d-md-block" href="tel:1900888866">
-          Gọi tổng đài 1900.888.866
-        </a>
-        <a class="header__call-phone d-none d-md-block" target="_blank" rel="noreferrer" href="https://dkkham.bachmai.gov.vn/dat-lich">
-          Đặt lịch khám
-        </a>
-        <a class="header__logo d-block d-md-none flex-1" href="/">
-          <img src="/logo/logo-mobile.png" alt="">
-        </a>
-      </div>
-    </div>
-  </div>
+<body class="bg-[#0f172a] text-gray-200 flex flex-col h-screen">
 
-  <div class="header__menu-top pt-2 pb-2 container mx-auto hidden md:flex items-center justify-between">
-    <div class="header__logo">
-      <a title="Trang chủ" href="/">
-        <img src="/logo/logo.png" alt="">
+  <!-- Top Navbar -->
+  <header class="flex items-center justify-between bg-[#1e293b] px-6 h-14 border-b border-gray-700">
+    <!-- Left: Logo -->
+    <div class="flex items-center space-x-2 font-bold text-lg text-white">
+      <span class="material-symbols-outlined text-cyan-400">medical_services</span>
+      <span>ClinicSys</span>
+
+      
+    </div>
+
+    
+
+    <!-- Right: Icons -->  <!-- Middle: Navigation Menu -->
+    <div class="flex items-center space-x-6 text-gray-300">
+      
+    <nav class="flex items-center space-x-6 text-gray-300" id="navbar-menu">
+      <a href="#" data-page="dashboard" class="nav-link">
+        <!-- <span class="material-symbols-outlined text-[20px]">dashboard</span> -->
+        <span>Dashboard</span>
       </a>
-    </div>
+      <a href="#" data-page="patients" class="nav-link">
+        <!-- <span class="material-symbols-outlined text-[20px]">groups</span> -->
+        <span>Patients</span>
+      </a>
+      <a href="#" data-page="doctors" class="nav-link active">
+        <!-- <span class="material-symbols-outlined text-[20px]">medical_information</span> -->
+        <span>Doctors</span>
+      </a>
+      <a href="#" data-page="appointments" class="nav-link">
+        <!-- <span class="material-symbols-outlined text-[20px]">calendar_month</span> -->
+        <span>Appointments</span>
+      </a>
+      <a href="#" data-page="settings" class="nav-link">
+        <!-- <span class="material-symbols-outlined text-[20px]">settings</span> -->
+        <span>Settings</span>
+      </a>
+    </nav>
 
-    <div>
-      <p>
-        <img src="https://apicms.bachmai.gov.vn/images/2025/2/19/31d91cc4-154e-4bd7-95ac-73f0d09b8a47_0a710ded-f617-4516-a0d5-aa4692b2363f_mceu_92191181111739953645214.jpg"
-             alt=""
-             width="420"
-             height="56">
-      </p>
+      <span class="material-symbols-outlined cursor-pointer hover:text-cyan-400">notifications</span>
+      <span class="material-symbols-outlined cursor-pointer hover:text-cyan-400">account_circle</span>
     </div>
+  </header>
 
-    <div class="flex items-center space-x-8">
-      <div class="header__search">
-        <div class="input">
-          <input type="text" placeholder="Từ khóa tìm kiếm..." value="">
-          <div class="icon-search">
-            <svg class="w-5 h-5 text-white">
-              <use xlink:href="/assets/svgsprite/sprite.svg#icon-search"></use>
-            </svg>
-          </div>
-        </div>
-      </div>
-    </div>
+  <!-- Main Content -->
+  <div class="welcom">
+    <h1 class="text-3xl font-bold text-cyan-400">Bác sĩ</h1>
+    <h1>Đội ngũ bác sĩ chuyên khoa</h1>
+
   </div>
 
-  <div class="d-block d-md-none">
-    <div class="menu-mobile">
-      <div class="container mx-auto text-center">
-        <nav>
-          <div class="hamburger">
-            <svg class="w-6 h-6 text-white">
-              <use xlink:href="/assets/svgsprite/sprite.svg#icon-menu"></use>
-            </svg>
-          </div>
+  <!-- Thanh tìm kiếm + bộ lọc -->
+<aside class="sidebar">
+  <input type="text" placeholder="Tìm kiếm bác sĩ..." class="search-input">
+  <button class="search-btn">Tìm kiếm</button>
 
-          <ul class="list-menu">
-            <li class="menu-item">
-              <a class="menu-item-link" href="/">
-                <span><span>Trang chủ</span></span>
-              </a>
-            </li>
-            <li class="menu-item">
-              <a class="menu-item-link" href="/gioi-thieu">
-                <span><span>Giới thiệu</span></span>
-              </a>
-            </li>
-            <li class="menu-item">
-              <a class="menu-item-link" href="/co-cau-to-chuc">
-                <span><span>Cơ cấu tổ chức</span></span>
-              </a>
-            </li>
-            <li class="menu-item active-menu">
-              <a class="menu-item-link" href="/doi-ngu-bac-si">
-                <span><span>Đội ngũ bác sĩ</span></span>
-              </a>
-            </li>
-            <li class="menu-item">
-              <a class="menu-item-link" href="https://dkkham.bachmai.gov.vn/dat-lich">
-                <span><span>Đặt lịch khám</span></span>
-              </a>
-            </li>
-            <li class="menu-item">
-              <a class="menu-item-link" href="">
-                <span><span>Tin tức</span></span>
-                <div>
-                  <svg class="w-4 h-4 text-main">
-                    <use xlink:href="/assets/svgsprite/sprite.svg#icon-add"></use>
-                  </svg>
-                </div>
-              </a>
-            </li>
-            <li class="menu-item">
-              <a class="menu-item-link" href="#">
-                <span><span>Dành cho bệnh nhân</span></span>
-                <div>
-                  <svg class="w-4 h-4 text-main">
-                    <use xlink:href="/assets/svgsprite/sprite.svg#icon-add"></use>
-                  </svg>
-                </div>
-              </a>
-            </li>
-            <li class="menu-item">
-              <a class="menu-item-link" href="#">
-                <span><span>Bach Mai Family</span></span>
-                <div>
-                  <svg class="w-4 h-4 text-main">
-                    <use xlink:href="/assets/svgsprite/sprite.svg#icon-add"></use>
-                  </svg>
-                </div>
-              </a>
-            </li>
-            <li class="menu-item">
-              <a class="menu-item-link" href="/chuyen-muc/thong-tin-tuyen-dung?id=d671d286-cb7e-4d1a-a742-d324ceef6158">
-                <span><span>Thông tin tuyển dụng</span></span>
-              </a>
-            </li>
-            <li class="menu-item menu-login">
-              <a href="#">Đăng nhập</a>
-            </li>
-
-            <div class="d-flex justify-content-end flex-column h-100 pb-4">
-              <div class="pl-4 pr-4">
-                <a class="button-primary-outline w-100 text-center" href="tel:1900888866">
-                  Gọi tổng đài 1900.888.866
-                </a>
-              </div>
-              <div class="pl-4 pr-4">
-                <a class="button-primary w-100 mt-2 text-center" href="https://dkkham.bachmai.gov.vn/dat-lich">
-                  Đặt lịch khám
-                </a>
-              </div>
-            </div>
-          </ul>
-        </nav>
-      </div>
-    </div>
+  <div class="filter-section">
+    <h3>Khối Lâm sàng - Viện, Trung tâm</h3>
+    <ul>
+      <li>Trung Tâm Cấp Cứu A9</li>
+      <li>Trung tâm Khám bệnh và Điều trị trong ngày</li>
+      <li>Trung Tâm Cơ Xương Khớp</li>
+      <li>Trung Tâm Hồi Sức Tích Cực</li>
+      <li>Trung Tâm Hô Hấp</li>
+      <li>Trung Tâm Chống Độc</li>
+    </ul>
   </div>
-</div>
+</aside>
 
+<!-- Khu vực kết quả -->
+<main class="content">
+  <h1>Tất cả <span class="count">669</span> bác sĩ chuyên khoa</h1>
+
+  <div class="doctor-list">
+    <div class="doctor-card">
+      <img src="doctor1.jpg" alt="Doctor">
+      <h2>PGS. TS. Đào Xuân Cơ</h2>
+      <p>Giám đốc Bệnh viện</p>
+    </div>
+    <div class="doctor-card">
+      <img src="doctor2.jpg" alt="Doctor">
+      <h2>PGS. TS. Vũ Văn Giáp</h2>
+      <p>Phó Giám đốc Bệnh viện</p>
+    </div>
+    <!-- Thêm các bác sĩ khác -->
+  </div>
+  </main>
+
+
+  <!-- Custom JS -->
+  <script src="script.js"></script>
 </body>
 </html>
+

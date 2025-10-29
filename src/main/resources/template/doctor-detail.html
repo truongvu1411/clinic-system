@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Chi tiết bác sĩ</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>CHI TIẾT BÁC SĨ</h1>
+        <div id="doctorDetail"></div>
+        <a id="bookingLink" href="#">Đặt lịch với bác sĩ này</a>
+    </div>
+
+    <script>
+        const API_URL = "http://localhost:8080/doctors";
+        const params = new URLSearchParams(window.location.search);
+        const email = params.get("email");
+
+        async function loadDoctorDetail() {
+            const res = await fetch(API_URL);
+            const data = await res.json();
+            const doctor = data.result.find(d => d.email === email);
+
+            const div = document.getElementById("doctorDetail");
+            if (doctor) {
+                div.innerHTML = `
+                    <p><b>Tên:</b> ${doctor.name}</p>
+                    <p><b>Email:</b> ${doctor.email}</p>
+                    <p><b>Chuyên khoa:</b> ${doctor.speciality}</p>
+                `;
+                document.getElementById("bookingLink").href = `booking.html?email=${doctor.email}`;
+            } else {
+                div.innerHTML = "<p>Không tìm thấy bác sĩ.</p>";
+            }
+        }
+        loadDoctorDetail();
+    </script>
+</body>
+</html>
